@@ -1,3 +1,6 @@
+require('dotenv').config()
+console.log(process.env.KEY)
+
 let fs = require('fs');
 let url = require('url');
 let http = require('http');
@@ -24,6 +27,6 @@ http.createServer((req, res) => {
             return res.end();
         }
     });
-}).listen(8080);
+}).listen(3050);
 
 console.log("Server running on port 8080");
