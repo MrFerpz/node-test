@@ -24,6 +24,10 @@ app.get("/", (req, res) => {
   res.render("index", { links: links, users: users })
 });
 
+app.get("/about", (req, res) => {
+  res.render("about", { aboutInfo: "Welcome to the about page."})
+})
+
 // app.use("/", indexRouter);
 // saying that when we're on / path, we run indexRouter function
 // calling indexRouter listens for a GET request, resulting in sending a file

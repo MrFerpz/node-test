@@ -1,3 +1,17 @@
 body {
     color: red;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
+
+.footer-container {
+  background-color: black;
+  height: 100px;
+  position: relative;
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
