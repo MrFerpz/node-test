@@ -1,9 +1,8 @@
 const db = require("../db");
+const asyncHandler = require("express-async-handler");
 
-async function getAuthorById(req, res) {
+const getAuthorById = asyncHandler(async (req, res) => {
   const { authorId } = req.params;
-
-  try {
 
   const author = await db.getAuthorById(Number(authorId));
 
@@ -13,13 +12,7 @@ async function getAuthorById(req, res) {
   }
 
   res.send(`Author Name: ${author.name}`)
-    } 
-
-    catch (error) {
-        console.error("Error retrieving author:", error);
-        res.status(500).send("Internal Server Error")
     }
-    ;
-};
+);
 
 module.exports = { getAuthorById };
