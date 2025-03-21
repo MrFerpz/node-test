@@ -10,11 +10,19 @@ const app = express();
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
+const assetsPath = path.join(__dirname, "public");
+app.use(express.static(assetsPath));
+
+const links = [
+  { href: "/", text: "Home"},
+  { href: "about", text: "About"}
+];
+
+const users = ["Rose", "Cake", "Biff"]
 
 app.get("/", (req, res) => {
-  res.locals.booty = "local variables test";
-  res.render("index", {message: "EJS rocks!"})
-})
+  res.render("index", { links: links, users: users })
+});
 
 // app.use("/", indexRouter);
 // saying that when we're on / path, we run indexRouter function
