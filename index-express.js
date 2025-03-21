@@ -1,11 +1,25 @@
 const express = require('express');
-const app = express();
+const path = require("node:path");
+
 const authorRouter = require('./routes/authorRouter');
 const bookRouter = require('./routes/bookRouter');
 const indexRouter = require('./routes/indexRouter');
 const errRouter = require('./routes/errRouter')
 
-app.use("/", indexRouter);
+const app = express();
+
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
+
+app.get("/", (req, res) => {
+  res.locals.booty = "local variables test";
+  res.render("index", {message: "EJS rocks!"})
+})
+
+// app.use("/", indexRouter);
+// saying that when we're on / path, we run indexRouter function
+// calling indexRouter listens for a GET request, resulting in sending a file
+
 app.use("/author", authorRouter);
 app.use("/book", bookRouter);
 app.use("*", errRouter)
@@ -14,6 +28,11 @@ app.use("*", errRouter)
 // app.get("/index.html", (req, res) => res.sendFile("/Users/fredpy/repos/basic-node-site/index.html"))
 // app.get("/about.html", (req, res) => res.sendFile("/Users/fredpy/repos/basic-node-site/about.html"))
 // app.get("/contact-me.html", (req, res) => res.sendFile("/Users/fredpy/repos/basic-node-site/contact-me.html"))
+
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(500).send(err);
+});
 
 const PORT = 3050;
 app.listen(PORT, () => {

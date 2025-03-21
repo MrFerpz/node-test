@@ -15,4 +15,4 @@ const getAuthorById = asyncHandler(async (req, res) => {
     }
 );
 
-module.exports = { getAuthorById };
+module.exports = { getAuthorById, asyncHandler, db };
